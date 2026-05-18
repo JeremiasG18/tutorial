@@ -1,12 +1,68 @@
-<body>
-    <a href="/">Home</a>
-    <a href="/about/">About</a>
-    <a href="/blog/">Blog</a>
+---
+import BaseLayout from '../layouts/BaseLayout.astro'; // uso la plantilla base
 
-    <h1>About Me</h1>
+// codigo javascript que funciona en tiempo de ejecución. cuando carga la pagina se ejecuta todo el codigo y luego deja de funcionar. Para darle interactividad a la pagina se usa javascript en la etiqueta <script></script>
+const identity = {
+    firstName: "Sarah",
+    country: "Canada",
+    occupation: "Technical Writer",
+    hobbies: ["photography", "birdwatching", "baseball"],
+};
+
+const skills = ["HTML", "CSS", "JavaScript", "React", "Astro", "Writing Docs"];
+
+const happy = true;
+const finished = false;
+const goal = 3;
+
+// podemos crear variables js, para usarlos como variables en css
+const skillColor = "crimson";
+const fontWeight = 'bold';
+const textCase = 'uppercase';
+
+const pageTitle = "About Me";
+---
+
+<!-- con define:vars={{ variables }} podemos convertir variables js en css -->
+<!-- estos estilos solo afectan a este archivo, en este caso solo afectaria a los <li> pero no al <h1> porque no esta en el mismo archivo. Para que sea global y afecte al h1 del archivo base se usa is:global. Y por ende afecta a todos los archivos -->
+<style is:global define:vars={{skillColor, fontWeight, textCase}}>
+    h1 {
+        font-size: 4rem;
+        color: purple;
+    }
+
+    .skill {
+        color: var(--skillColor);
+        font-weight: var(--fontWeight);
+        text-transform: var(--textCase);
+    }
+</style>
+
+
+<BaseLayout pageTitle={pageTitle}>
     <h2>... and my new Astro site!</h2>
 
     <p>I am working through Astro's introductory tutorial. This is the second page on my website, and it's the first one I built myself!</p>
 
     <p>This site will update as I complete more of the tutorial, so keep checking back and see how my journey is going!</p>
-</body>
+
+    <p>Here are a few facts about me:</p>
+    <ul>
+        <li class="skill">My name is {identity.firstName}.</li>
+        <li class="skill">I live in {identity.country} and I work as a {identity.occupation}.</li>
+        {identity.hobbies.length >= 2 &&
+            <li class="skill">Two of my hobbies are: {identity.hobbies[0]} and {identity.hobbies[1]}</li>
+        }
+    </ul>
+    <p>My skills are:</p>
+    <ul>
+        {skills.map((skill) => <li class="skill">{skill}</li>)}
+    </ul>
+
+    <!-- usando codigo javascript dentro de corchetes { } -->
+    {happy && <p>I am happy to be learning Astro!</p>}
+
+    {finished && <p>I finished this tutorial!</p>}
+
+    {goal === 3 ? <p>My goal is to finish in 3 days.</p> : <p>My goal is not 3 days.</p>}
+</BaseLayout>

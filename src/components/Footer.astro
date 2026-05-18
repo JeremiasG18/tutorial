@@ -1,0 +1,19 @@
+---
+import Social from "./Social.astro"; // importo el componente Social 
+---
+<!-- frontmatter ⬆⬆⬆ ahi se escribe codigo javascript  -->
+
+<style>
+  footer {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+</style>
+
+<footer>
+    <!-- Uso el componente social y le paso las props => plataform y username -->
+    <Social platform="twitter" username="astrodotbuild" /> 
+    <Social platform="github" username="withastro" />
+    <Social platform="youtube" username="astrodotbuild" />
+</footer>
