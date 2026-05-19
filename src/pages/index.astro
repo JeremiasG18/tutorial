@@ -1,13 +1,13 @@
 ---
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-
-import '../styles/global.css';
+// import '../styles/global.css';
 import BaseLayout from '../layouts/BaseLayout.astro';
-
+import Greeting from '../components/Geeting.jsx';
 const pageTitle = 'Home Page';
 ---
 
 <BaseLayout pageTitle={pageTitle}>
 	<h2>My awesome blog subtitle</h2>
+
+	<!-- <Greeting client:load messages={["Hola", "Qué tal", "Hola a todos"]} /> -->
+	<!-- <Greeting client:load messages={["Hej", "Hallo", "Hola", "Habari"]} /> -->
 </BaseLayout>
